@@ -163,11 +163,20 @@ EXCLUDE_SRC :=                            \
 
 LOCAL_C_INCLUDES:=                                                  \
         $(call include-path-for, wilhelm)                           \
-        frameworks/av/media/libstagefright                        \
-        frameworks/av/media/libstagefright/include                \
-        frameworks/av/media/libstagefright/http                     \
         frameworks/native/include/media/openmax                     \
         $(call include-path-for, audio-effects)
+
+ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
+LOCAL_C_INCLUDES += \
+        frameworks/av-caf/media/libstagefright                        \
+        frameworks/av-caf/media/libstagefright/include                \
+        frameworks/av-caf/media/libstagefright/http
+else
+LOCAL_C_INCLUDES += \
+        frameworks/av/media/libstagefright                        \
+        frameworks/av/media/libstagefright/include                \
+        frameworks/av/media/libstagefright/http
+endif
 
 # __pthread_gettid
 LOCAL_C_INCLUDES += bionic/libc/private
@@ -207,9 +216,18 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := sl_entry.c sl_iid.c assert.c
 LOCAL_C_INCLUDES:=                                                  \
         $(call include-path-for, wilhelm)                           \
-        frameworks/av/media/libstagefright                        \
-        frameworks/av/media/libstagefright/include                \
         frameworks/native/include/media/openmax
+
+ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
+LOCAL_C_INCLUDES += \
+        frameworks/av-caf/media/libstagefright                        \
+        frameworks/av-caf/media/libstagefright/include
+else
+LOCAL_C_INCLUDES += \
+        frameworks/av/media/libstagefright                        \
+        frameworks/av/media/libstagefright/include
+endif
+
 LOCAL_MODULE := libOpenSLES
 LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE_TAGS := optional
@@ -222,9 +240,18 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := xa_entry.c xa_iid.c assert.c
 LOCAL_C_INCLUDES:=                                                  \
         $(call include-path-for, wilhelm)                           \
-        frameworks/av/media/libstagefright                        \
-        frameworks/av/media/libstagefright/include                \
         frameworks/native/include/media/openmax
+
+ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
+LOCAL_C_INCLUDES += \
+        frameworks/av-caf/media/libstagefright                        \
+        frameworks/av-caf/media/libstagefright/include
+else
+LOCAL_C_INCLUDES += \
+        frameworks/av/media/libstagefright                        \
+        frameworks/av/media/libstagefright/include
+endif
+
 LOCAL_MODULE := libOpenMAXAL
 LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE_TAGS := optional
