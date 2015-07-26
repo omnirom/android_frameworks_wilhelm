@@ -166,12 +166,18 @@ LOCAL_C_INCLUDES:=                                                  \
         frameworks/native/include/media/openmax                     \
         $(call include-path-for, audio-effects)
 
-ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
+ifeq ($(BOARD_USES_QCOM_HARDWARE),true) 
+ifeq ($(BOARD_NO_USES_AV-CAF),true)
+LOCAL_C_INCLUDES += \
+        frameworks/av/media/libstagefright                        \
+        frameworks/av/media/libstagefright/include                \
+        frameworks/av/media/libstagefright/http
+else
 LOCAL_C_INCLUDES += \
         frameworks/av-caf/media/libstagefright                        \
         frameworks/av-caf/media/libstagefright/include                \
         frameworks/av-caf/media/libstagefright/http
-else
+endif
 LOCAL_C_INCLUDES += \
         frameworks/av/media/libstagefright                        \
         frameworks/av/media/libstagefright/include                \
@@ -219,10 +225,14 @@ LOCAL_C_INCLUDES:=                                                  \
         frameworks/native/include/media/openmax
 
 ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
+ifeq ($(BOARD_NO_USES_AV-CAF),true)
 LOCAL_C_INCLUDES += \
+        frameworks/av/media/libstagefright                        \
+        frameworks/av/media/libstagefright/include
+else
         frameworks/av-caf/media/libstagefright                        \
         frameworks/av-caf/media/libstagefright/include
-else
+endif
 LOCAL_C_INCLUDES += \
         frameworks/av/media/libstagefright                        \
         frameworks/av/media/libstagefright/include
@@ -242,11 +252,16 @@ LOCAL_C_INCLUDES:=                                                  \
         $(call include-path-for, wilhelm)                           \
         frameworks/native/include/media/openmax
 
-ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
+ifeq ($(BOARD_USES_QCOM_HARDWARE),true) 
+ifeq ($(BOARD_NO_USES_AV-CAF),true)
+LOCAL_C_INCLUDES += \
+        frameworks/av/media/libstagefright                        \
+        frameworks/av/media/libstagefright/include
+else
 LOCAL_C_INCLUDES += \
         frameworks/av-caf/media/libstagefright                        \
         frameworks/av-caf/media/libstagefright/include
-else
+endif
 LOCAL_C_INCLUDES += \
         frameworks/av/media/libstagefright                        \
         frameworks/av/media/libstagefright/include
