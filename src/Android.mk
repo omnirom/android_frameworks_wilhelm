@@ -97,6 +97,7 @@ LOCAL_SRC_FILES:=                     \
         android/android_StreamPlayer.cpp      \
         android/android_Effect.cpp            \
         android/util/AacAdtsExtractor.cpp     \
+        android/channels.c                    \
         autogen/IID_to_MPH.c                  \
         objects/C3DGroup.c                    \
         objects/CAudioPlayer.c                \
@@ -180,8 +181,9 @@ endif
 
 # __pthread_gettid
 LOCAL_C_INCLUDES += bionic/libc/private
+LOCAL_CFLAGS += -x c++ -std=gnu++11 -Wno-multichar -Wno-invalid-offsetof
 
-LOCAL_CFLAGS += -x c++ -Wno-multichar -Wno-invalid-offsetof
+LOCAL_CFLAGS += -Wno-unused-parameter
 
 LOCAL_STATIC_LIBRARIES += \
         libopensles_helper        \
@@ -209,7 +211,6 @@ ifeq ($(TARGET_BUILD_VARIANT),userdebug)
         LOCAL_CFLAGS += -DUSERDEBUG_BUILD=1
 endif
 
-LOCAL_PRELINK_MODULE := false
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -229,9 +230,8 @@ LOCAL_C_INCLUDES += \
 endif
 
 LOCAL_MODULE := libOpenSLES
-LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE_TAGS := optional
-LOCAL_CFLAGS += -x c++ -DLI_API= -fvisibility=hidden -UNDEBUG \
+LOCAL_CFLAGS += -x c++ -std=gnu++11 -DLI_API= -fvisibility=hidden -UNDEBUG \
                 -DSL_API='__attribute__((visibility("default")))'
 LOCAL_SHARED_LIBRARIES := libwilhelm liblog
 include $(BUILD_SHARED_LIBRARY)
@@ -253,9 +253,8 @@ LOCAL_C_INCLUDES += \
 endif
 
 LOCAL_MODULE := libOpenMAXAL
-LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE_TAGS := optional
-LOCAL_CFLAGS += -x c++ -DLI_API= -fvisibility=hidden -UNDEBUG \
+LOCAL_CFLAGS += -x c++ -std=gnu++11 -DLI_API= -fvisibility=hidden -UNDEBUG \
                 -DXA_API='__attribute__((visibility("default")))'
 LOCAL_SHARED_LIBRARIES := libwilhelm liblog
 include $(BUILD_SHARED_LIBRARY)
