@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2016 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,14 @@
  * limitations under the License.
  */
 
-extern int kbhit();
-extern int getch(void);
-extern void set_conio_terminal_mode(void);
-extern void reset_terminal_mode(void);
+// Put build-time configuration options here rather than Android.mk,
+// so that all build modules will pick up the same options.
+
+#ifndef ANDROID_WILHELM_CONFIGURATION_H
+#define ANDROID_WILHELM_CONFIGURATION_H
+
+// uncomment to enable mutex deadlock detection,
+// or comment to disable mutex deadlock detection
+#define USE_DEBUG
+
+#endif // ANDROID_WILHELM_CONFIGURATION_H
