@@ -162,20 +162,11 @@ EXCLUDE_SRC :=                            \
 
 LOCAL_C_INCLUDES:=                                                  \
         $(call include-path-for, wilhelm)                           \
-        frameworks/native/include/media/openmax                     \
-        $(call include-path-for, audio-effects)
-
-ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
-LOCAL_C_INCLUDES += \
-        frameworks/av-caf/media/libstagefright                        \
-        frameworks/av-caf/media/libstagefright/include                \
-        frameworks/av-caf/media/libstagefright/http
-else
-LOCAL_C_INCLUDES += \
         frameworks/av/media/libstagefright                        \
         frameworks/av/media/libstagefright/include                \
-        frameworks/av/media/libstagefright/http
-endif
+        frameworks/av/media/libstagefright/http                     \
+        frameworks/native/include/media/openmax                     \
+        $(call include-path-for, audio-effects)
 
 # __pthread_gettid
 LOCAL_C_INCLUDES += bionic/libc/private
@@ -222,18 +213,9 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := sl_entry.c sl_iid.c assert.c
 LOCAL_C_INCLUDES:=                                                  \
         $(call include-path-for, wilhelm)                           \
-        frameworks/native/include/media/openmax
-
-ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
-LOCAL_C_INCLUDES += \
-        frameworks/av-caf/media/libstagefright                        \
-        frameworks/av-caf/media/libstagefright/include
-else
-LOCAL_C_INCLUDES += \
         frameworks/av/media/libstagefright                        \
-        frameworks/av/media/libstagefright/include
-endif
-
+        frameworks/av/media/libstagefright/include                \
+        frameworks/native/include/media/openmax
 LOCAL_MODULE := libOpenSLES
 LOCAL_MODULE_TAGS := optional
 LOCAL_CFLAGS += -x c++ -std=gnu++11 -DLI_API= -fvisibility=hidden -UNDEBUG \
@@ -245,18 +227,9 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := xa_entry.c xa_iid.c assert.c
 LOCAL_C_INCLUDES:=                                                  \
         $(call include-path-for, wilhelm)                           \
-        frameworks/native/include/media/openmax
-
-ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
-LOCAL_C_INCLUDES += \
-        frameworks/av-caf/media/libstagefright                        \
-        frameworks/av-caf/media/libstagefright/include
-else
-LOCAL_C_INCLUDES += \
         frameworks/av/media/libstagefright                        \
-        frameworks/av/media/libstagefright/include
-endif
-
+        frameworks/av/media/libstagefright/include                \
+        frameworks/native/include/media/openmax
 LOCAL_MODULE := libOpenMAXAL
 LOCAL_MODULE_TAGS := optional
 LOCAL_CFLAGS += -x c++ -std=gnu++11 -DLI_API= -fvisibility=hidden -UNDEBUG \
